@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Library</title>
+    <!-- Add Bootstrap CSS link -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        h1 {
+            color: #007bff;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            background-color: #ffffff;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        a {
+            color: #dc3545;
+            margin-left: 10px;
+        }
+
+        a:hover {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Book Library</h1>
+        
+        <form method="POST" action="/add_book" class="form-inline justify-content-center">
+            <div class="form-group mx-sm-3 mb-2">
+                <label for="title" class="sr-only">Title:</label>
+                <input type="text" name="title" class="form-control" placeholder="Title" required>
+            </div>
+            <div class="form-group mx-sm-3 mb-2">
+                <label for="author" class="sr-only">Author:</label>
+                <input type="text" name="author" class="form-control" placeholder="Author" required>
+            </div>
+            <button type="submit" class="btn btn-primary mb-2">Add Book</button>
+        </form>
+        
+        <ul>
+            {% for book in books %}
+                <li>
+                    <span>{{ book.title }} by {{ book.author }}</span>
+                    <a href="{{ url_for('delete_book', id=book.id) }}" class="btn btn-sm btn-danger float-right">Delete</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <!-- Add Bootstrap JS and Popper.js scripts (required for Bootstrap) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
